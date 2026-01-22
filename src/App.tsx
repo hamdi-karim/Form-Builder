@@ -7,6 +7,7 @@ import { FormBuilder, GeneratedForm } from "./components";
 function App() {
   const rows = useAppSelector((state: RootState) => state.formSlice.rows);
   const formType = useAppSelector((state: RootState) => state.formSlice.formType);
+  const isSubmitted = useAppSelector((state: RootState) => state.formSlice.isSubmitted);
   const dispatch = useAppDispatch();
 
   const isFormValid = rows.length > 0 && rows.every((row) => row.label.trim() !== "");
@@ -27,13 +28,15 @@ function App() {
         </p>
       )}
 
-      <button
-        className="btn-primary"
-        onClick={handleFormTypeSwitch}
-        disabled={formType === "Builder" && !isFormValid}
-      >
-        {formType === "Builder" ? "Save" : "Edit"}
-      </button>
+      {!isSubmitted && (
+        <button
+          className="btn-primary"
+          onClick={handleFormTypeSwitch}
+          disabled={formType === "Builder" && !isFormValid}
+        >
+          {formType === "Builder" ? "Save" : "Edit"}
+        </button>
+      )}
     </div>
   );
 }

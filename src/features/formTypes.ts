@@ -9,6 +9,7 @@ export interface FormRow {
 export interface InitialStateType {
   rows: FormRow[];
   formType: FormType;
+  isSubmitted: boolean;
 }
 
 export type FormType = "Builder" | "Generated";

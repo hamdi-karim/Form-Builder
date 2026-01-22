@@ -11,6 +11,7 @@ const initialState: InitialStateType = {
     },
   ],
   formType: "Builder",
+  isSubmitted: false,
 };
 
 export const formSlice = createSlice({
@@ -35,10 +36,19 @@ export const formSlice = createSlice({
     removeInputRow: (state, action: PayloadAction<string>) => {
       state.rows = state.rows.filter((row) => row.id !== action.payload);
     },
+
+    submitForm: (state) => {
+      state.isSubmitted = true;
+    },
+
+    resetForm: (state) => {
+      state.isSubmitted = false;
+      state.formType = "Builder";
+    },
   },
 });
 
-export const { switchFormType, addInputRow, updateInputRow, removeInputRow } =
+export const { switchFormType, addInputRow, updateInputRow, removeInputRow, submitForm, resetForm } =
   formSlice.actions;
 
 export default formSlice.reducer;
